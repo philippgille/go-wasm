@@ -60,3 +60,14 @@ deno run --allow-read=./go-wasm.wasm deno.js
 ℹ️: Deno runs programs in a sandbox by default, so for reading the WASM file we need to grant the permission accordingly.
 
 > Tested with Deno 1.36.1
+
+### Bun
+
+```bash
+cp go-wasm.wasm bun
+cp $(go env GOROOT)/misc/wasm/wasm_exec.js deno/wasm_exec.js
+cd bun
+bun bun.js
+```
+
+> Tested with Bun 0.7.3
