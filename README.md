@@ -103,3 +103,7 @@ go run .
 ### wasmtime
 
 🚧 TODO: <https://github.com/bytecodealliance/wasmtime-go>
+
+### Wasmer
+
+🚧 TODO: <https://github.com/wasmerio/wasmer-go>
