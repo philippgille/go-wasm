@@ -99,3 +99,7 @@ cp go-wasi.wasm wazero
 cd wazero
 go run .
 ```
+
+### wasmtime
+
+🚧 TODO: <https://github.com/bytecodealliance/wasmtime-go>
