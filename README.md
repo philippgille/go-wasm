@@ -71,3 +71,7 @@ bun bun.js
 ```
 
 > Tested with Bun 0.7.3
+
+## Embedding WASM in Go
+
+🚧 TODO
