@@ -14,6 +14,8 @@ Compile the Go program to WebAssembly: `GOOS=js GOARCH=wasm go build -o go-wasm.
 
 Go WASM execution requires a Go-specific wrapper, `wasm_exec.js`. This can then be executed by any JavaScript runtime, in or outside the browser. The Go project provides this in `$(go env GOROOT)/misc/wasm/wasm_exec.js`.
 
+The non-browser runtimes differ in how files are read from the host's filesystem, so for reading the `wasm_exec.js` file, in addition to this file itself, we need to have another runtime-specific wrapper.
+
 ### Browser
 
 For running the WASM program in the browser, you can serve the files with any web server that supports the `application/wasm` MIME type. You can use a regular Go server (`http.ListenAndServe(...)`), Caddy, or others.
@@ -28,3 +30,20 @@ caddy file-server --listen :2015
 Then in your browser visit <http://localhost:2015>.
 
 > Tested with Firefox 116.0.3
+
+### Node
+
+```bash
+cp go-wasm.wasm node
+cp $(go env GOROOT)/misc/wasm/wasm_exec.js deno/wasm_exec.js
+cd node
+node node.js
+```
+
+The Go authors also provide a convenience script for this, so instead of copying the `wasm_exec.js` and writing our own `node.js` wrapper script, we can simply run:
+
+```bash
+$(go env GOROOT)/misc/wasm/go_js_wasm_exec go-wasm.wasm
+```
+
+> Tested with Node v18.17.1
