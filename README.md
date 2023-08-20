@@ -2,7 +2,7 @@
 
 This repo contains examples of how to work with WebAssembly and WASI in the Go ecosystem.
 
-Regular WASM is meant to be executed inside a browser (like Chrome or Firefox) or JavaScript runtime (like Node, Deno or Bun). As such it only has access to [web APIs](https://developer.mozilla.org/en-US/docs/Web/API) or runtime-specific APIs.
+Regular WASM is meant to be executed inside a browser (like Chrome or Firefox) or JavaScript runtime (like [Node](https://nodejs.org), [Deno](https://deno.land/) or [Bun](https://bun.sh/)). As such it only has access to [web APIs](https://developer.mozilla.org/en-US/docs/Web/API) or runtime-specific APIs.
 
 WASI on the other hand, as the name "**W**eb**A**ssembly **S**ystem **I**nterface" suggests, provides more direct access to the host system, like to the filesystem or network sockets. Similar to how the browser executes JavaScript and WebAssembly in a sandbox, WASI runtimes also execute WASI programs in a sandbox, requiring explicit permissions for things like file access.
 
@@ -32,7 +32,7 @@ The non-browser runtimes differ in how files are read from the host's filesystem
 
 ### Browser
 
-For running the WASM program in the browser, you can serve the files with any web server that supports the `application/wasm` MIME type. You can use a regular Go server (`http.ListenAndServe(...)`), Caddy, or others.
+For running the WASM program in the browser, you can serve the files with any web server that supports the `application/wasm` MIME type. You can use a regular Go server (`http.ListenAndServe(...)`), [Caddy](https://caddyserver.com/), or others.
 
 ```bash
 cp go-wasm.wasm browser
@@ -60,7 +60,7 @@ The Go authors also provide a convenience script for this, so instead of copying
 $(go env GOROOT)/misc/wasm/go_js_wasm_exec go-wasm.wasm
 ```
 
-> Tested with Node v18.17.1
+> Tested with [Node v18.17.1](https://github.com/nodejs/node/releases/tag/v18.17.1)
 
 ### Deno
 
@@ -73,7 +73,7 @@ deno run --allow-read=./go-wasm.wasm deno.js
 
 ℹ️: Deno runs programs in a sandbox by default, so for reading the WASM file we need to grant the permission accordingly.
 
-> Tested with Deno 1.36.1
+> Tested with [Deno 1.36.1](https://github.com/denoland/deno/releases/tag/v1.36.1)
 
 ### Bun
 
@@ -84,7 +84,7 @@ cd bun
 bun bun.js
 ```
 
-> Tested with Bun 0.7.3
+> Tested with [Bun 0.7.3](https://github.com/oven-sh/bun/releases/tag/bun-v0.7.3)
 
 ## Embedding WASM in Go
 
@@ -98,11 +98,11 @@ Compile Go program to WASI: `GOOS=wasip1 GOARCH=wasm go build -o go-wasi.wasm`
 
 Any WASM runtime with WASI support, on any OS, can then execute this file:
 
-- wasmtime: `wasmtime go-wasi.wasm`
-- wasmer: `wasmer run go-wasi.wasm`
-- wazero: `wazero run go-wasi.wasm`
+- [wasmtime](https://wasmtime.dev/): `wasmtime go-wasi.wasm`
+- [Wasmer](https://wasmer.io/): `wasmer run go-wasi.wasm`
+- [wazero](https://wazero.io/): `wazero run go-wasi.wasm`
 
-> Tested with wasmtime CLI 11.0.0, Wasmer 4.1.1, wazero 1.4.0
+> Tested with [wasmtime CLI 11.0.0](https://github.com/bytecodealliance/wasmtime/releases/tag/v11.0.0), [Wasmer 4.1.1](https://github.com/wasmerio/wasmer/releases/tag/v4.1.1), [wazero 1.4.0](https://github.com/tetratelabs/wazero/releases/tag/v1.4.0)
 
 ## Embedding WASI in Go
 
