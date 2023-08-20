@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <script src="wasm_exec.js"></script>
+        <script>
+            // Polyfill from https://github.com/golang/go/blob/b2fcfc1a50fbd46556f7075f7f1fbf600b5c9e5d/misc/wasm/wasm_exec.html#L17-L22
+            if (!WebAssembly.instantiateStreaming) {
+                WebAssembly.instantiateStreaming = async (resp, importObject) => {
+                    const source = await (await resp).arrayBuffer();
+                    return await WebAssembly.instantiate(source, importObject);
+                };
+            }
+
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("go-wasm.wasm"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        </script>
+    </head>
+    <body>
+        <p>Open the debug console and reload the page to see the output.</p>
+        <p>The Go program can also export functions which we can call from JS, or it can even manipulate the DOM itself.</p>
+    </body>
+</html>

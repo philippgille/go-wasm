@@ -19,3 +19,12 @@
 
 # Go workspace file
 go.work
+
+# ========== Own additions
+
+# Ignore regular Go binary
+go-wasm
+# Ignore compiled WASM/WASI binaries
+*.wasm
+# Ignore the Go-specific WASM wrapper
+wasm_exec.js
