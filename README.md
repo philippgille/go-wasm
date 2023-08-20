@@ -4,7 +4,7 @@ This repo contains examples of how to work with WebAssembly and WASI in the Go e
 
 Regular WASM is meant to be executed inside a browser (like Chrome or Firefox) or JavaScript runtime (like Node, Deno or Bun). As such it only has access to [web APIs](https://developer.mozilla.org/en-US/docs/Web/API) or runtime-specific APIs.
 
-WASI on the other hand, as the name "**W**ebAssembly **S**ystem **I**nterface" suggests, provides more direct access to the host system, like to the filesystem or network sockets. Similar to how the browser executes JavaScript and WebAssembly in a sandbox, WASI runtimes also execute WASI programs in a sandbox, requiring explicit permissions for things like file access.
+WASI on the other hand, as the name "**W**eb**A**ssembly **S**ystem **I**nterface" suggests, provides more direct access to the host system, like to the filesystem or network sockets. Similar to how the browser executes JavaScript and WebAssembly in a sandbox, WASI runtimes also execute WASI programs in a sandbox, requiring explicit permissions for things like file access.
 
 ## WASM
 
