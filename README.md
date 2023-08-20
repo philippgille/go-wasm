@@ -6,6 +6,20 @@ Regular WASM is meant to be executed inside a browser (like Chrome or Firefox) o
 
 WASI on the other hand, as the name "**W**eb**A**ssembly **S**ystem **I**nterface" suggests, provides more direct access to the host system, like to the filesystem or network sockets. Similar to how the browser executes JavaScript and WebAssembly in a sandbox, WASI runtimes also execute WASI programs in a sandbox, requiring explicit permissions for things like file access.
 
+## Table of Contents
+
+- [WASM](#wasm)
+  - [Browser](#browser)
+  - [Node](#node)
+  - [Deno](#deno)
+  - [Bun](#bun)
+- [Embedding WASM in Go](#embedding-wasm-in-go)
+- [WASI](#wasi)
+- [Embedding WASI in Go](#embedding-wasi-in-go)
+  - [wazero](#wazero)
+  - [wasmtime](#wasmtime)
+  - [Wasmer](#wasmer)
+
 ## WASM
 
 This works with Go versions *prior* to 1.21, as it's "regular" WASM, not WASI.
