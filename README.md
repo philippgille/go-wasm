@@ -87,3 +87,15 @@ Any WASM runtime with WASI support, on any OS, can then execute this file:
 - wasmtime: `wasmtime go-wasi.wasm`
 - wasmer: `wasmer run go-wasi.wasm`
 - wazero: `wazero run go-wasi.wasm`
+
+## Embedding WASI in Go
+
+Or we run the WASI program with an embeddable WASM runtime from within another Go program. Most of the ⬆️ listed runtimes also have Go libraries for embedding.
+
+### wazero
+
+```bash
+cp go-wasi.wasm wazero
+cd wazero
+go run .
+```
