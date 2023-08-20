@@ -1,4 +1,4 @@
-module github.com/philippgille/go-wasm/wazero
+module github.com/philippgille/go-wasm/embed-wasi/wazero
 
 go 1.21.0
 

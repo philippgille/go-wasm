@@ -109,8 +109,8 @@ Or we run the WASI program with an embeddable WASM runtime from within another G
 ### wazero
 
 ```bash
-cp go-wasi.wasm wazero
-cd wazero
+cp go-wasi.wasm embed-wasi/wazero
+cd embed-wasi/wazero
 go run .
 ```
 
