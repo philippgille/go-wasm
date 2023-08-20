@@ -75,3 +75,15 @@ bun bun.js
 ## Embedding WASM in Go
 
 🚧 TODO
+
+## WASI
+
+Go 1.21 has official WASI *preview1* support, so we can compile Go programs to WASM that execute outside of a browser / JavaScript runtime.
+
+Compile Go program to WASI: `GOOS=wasip1 GOARCH=wasm go build -o go-wasi.wasm`
+
+Any WASM runtime with WASI support, on any OS, can then execute this file:
+
+- wasmtime: `wasmtime go-wasi.wasm`
+- wasmer: `wasmer run go-wasi.wasm`
+- wazero: `wazero run go-wasi.wasm`
