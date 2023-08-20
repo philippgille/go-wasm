@@ -47,3 +47,16 @@ $(go env GOROOT)/misc/wasm/go_js_wasm_exec go-wasm.wasm
 ```
 
 > Tested with Node v18.17.1
+
+### Deno
+
+```bash
+cp go-wasm.wasm deno
+cp $(go env GOROOT)/misc/wasm/wasm_exec.js deno/wasm_exec.js
+cd deno
+deno run --allow-read=./go-wasm.wasm deno.js
+```
+
+ℹ️: Deno runs programs in a sandbox by default, so for reading the WASM file we need to grant the permission accordingly.
+
+> Tested with Deno 1.36.1
