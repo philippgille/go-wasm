@@ -9,16 +9,18 @@ WASI on the other hand, as the name "**W**eb**A**ssembly **S**ystem **I**nterfac
 ## Table of Contents
 
 - [WASM](#wasm)
-  - [Browser](#browser)
-  - [Node](#node)
-  - [Deno](#deno)
-  - [Bun](#bun)
-- [Embedding WASM in Go](#embedding-wasm-in-go)
+  - [Execute WASM directly](#execute-wasm-directly)
+    - [Browser](#browser)
+    - [Node](#node)
+    - [Deno](#deno)
+    - [Bun](#bun)
+  - [Embed WASM in Go](#embed-wasm-in-go)
 - [WASI](#wasi)
-- [Embedding WASI in Go](#embedding-wasi-in-go)
-  - [wazero](#wazero)
-  - [wasmtime](#wasmtime)
-  - [Wasmer](#wasmer)
+  - [Execute WASI directly](#execute-wasi-directly)
+  - [Embed WASI in Go](#embed-wasi-in-go)
+    - [wazero](#wazero)
+    - [wasmtime](#wasmtime)
+    - [Wasmer](#wasmer)
 
 ## WASM
 
@@ -26,11 +28,13 @@ This works with Go versions *prior* to 1.21, as it's "regular" WASM, not WASI.
 
 Compile the Go program to WebAssembly: `GOOS=js GOARCH=wasm go build -o go-wasm.wasm`
 
+### Execute WASM directly
+
 Go WASM execution requires a Go-specific wrapper, `wasm_exec.js`. This can then be executed by any JavaScript runtime, in or outside the browser. The Go project provides this in `$(go env GOROOT)/misc/wasm/wasm_exec.js`.
 
 The non-browser runtimes differ in how files are read from the host's filesystem, so for reading the `wasm_exec.js` file, in addition to this file itself, we need to have another runtime-specific wrapper.
 
-### Browser
+#### Browser
 
 For running the WASM program in the browser, you can serve the files with any web server that supports the `application/wasm` MIME type. You can use a regular Go server (`http.ListenAndServe(...)`), [Caddy](https://caddyserver.com/), or others.
 
@@ -45,7 +49,7 @@ Then in your browser visit <http://localhost:2015>.
 
 > Tested with Firefox 116.0.3
 
-### Node
+#### Node
 
 ```bash
 cp go-wasm.wasm node
@@ -62,7 +66,7 @@ $(go env GOROOT)/misc/wasm/go_js_wasm_exec go-wasm.wasm
 
 > Tested with [Node v18.17.1](https://github.com/nodejs/node/releases/tag/v18.17.1)
 
-### Deno
+#### Deno
 
 ```bash
 cp go-wasm.wasm deno
@@ -75,7 +79,7 @@ deno run --allow-read=./go-wasm.wasm deno.js
 
 > Tested with [Deno 1.36.1](https://github.com/denoland/deno/releases/tag/v1.36.1)
 
-### Bun
+#### Bun
 
 ```bash
 cp go-wasm.wasm bun
@@ -86,7 +90,7 @@ bun bun.js
 
 > Tested with [Bun 0.7.3](https://github.com/oven-sh/bun/releases/tag/bun-v0.7.3)
 
-## Embedding WASM in Go
+### Embed WASM in Go
 
 🚧 TODO
 
@@ -96,19 +100,19 @@ Go 1.21 has official WASI *preview1* support, so we can compile Go programs to W
 
 Compile Go program to WASI: `GOOS=wasip1 GOARCH=wasm go build -o go-wasi.wasm`
 
+### Execute WASI directly
+
 Any WASM runtime with WASI support, on any OS, can then execute this file:
 
-- [wasmtime](https://wasmtime.dev/): `wasmtime go-wasi.wasm`
-- [Wasmer](https://wasmer.io/): `wasmer run go-wasi.wasm`
-- [wazero](https://wazero.io/): `wazero run go-wasi.wasm`
+- [wasmtime](https://wasmtime.dev/): `wasmtime go-wasi.wasm` (tested with [wasmtime CLI 11.0.0](https://github.com/bytecodealliance/wasmtime/releases/tag/v11.0.0))
+- [Wasmer](https://wasmer.io/): `wasmer run go-wasi.wasm` (tested with [Wasmer 4.1.1](https://github.com/wasmerio/wasmer/releases/tag/v4.1.1))
+- [wazero](https://wazero.io/): `wazero run go-wasi.wasm` (tested with [wazero 1.4.0](https://github.com/tetratelabs/wazero/releases/tag/v1.4.0))
 
-> Tested with [wasmtime CLI 11.0.0](https://github.com/bytecodealliance/wasmtime/releases/tag/v11.0.0), [Wasmer 4.1.1](https://github.com/wasmerio/wasmer/releases/tag/v4.1.1), [wazero 1.4.0](https://github.com/tetratelabs/wazero/releases/tag/v1.4.0)
-
-## Embedding WASI in Go
+### Embed WASI in Go
 
 Or we run the WASI program with an embeddable WASM runtime from within another Go program. Most of the ⬆️ listed runtimes also have Go libraries for embedding.
 
-### wazero
+#### wazero
 
 ```bash
 cp go-wasi.wasm embed-wasi/wazero
@@ -116,10 +120,10 @@ cd embed-wasi/wazero
 go run .
 ```
 
-### wasmtime
+#### wasmtime
 
 🚧 TODO: <https://github.com/bytecodealliance/wasmtime-go>
 
-### Wasmer
+#### Wasmer
 
 🚧 TODO: <https://github.com/wasmerio/wasmer-go>
